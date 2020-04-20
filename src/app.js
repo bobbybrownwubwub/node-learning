@@ -32,14 +32,14 @@ app.get("/weather", (req, res) => {
   if (!address) return res.send({ error: "NEEDS ADDRESS BITCH!" });
 
   geocode(address, (error, latlong) => {
-    if (error) res.send("GEOCODE ISSUE BITCH!");
+    if (error) res.send("GEOCODE ISSUE BITCH!!");
 
     forecast(error, latlong, (feelslike) => {
       res.send({
         feelslike,
       });
     });
-  });
+  }); 
 });
 
 app.get("/about", (req, res) => {
