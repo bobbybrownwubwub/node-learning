@@ -24,7 +24,7 @@ app.use(express.static(publicPath));
 
 app.get("/", (req, res) => {
   res.render("index", {
-    header: "Home Weather",
+    header: "Weather",
     // address,
     // feelslike: feelslike,
   });
@@ -48,7 +48,7 @@ app.get("/weather", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", {
     img_src: "../public/assets/1468.jpg",
-    header: "ABout",
+    header: "About",
   });
 });
 
