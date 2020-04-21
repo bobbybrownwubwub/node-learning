@@ -36,14 +36,18 @@ app.get("/weather", (req, res) => {
   geocode(address, (error, { long, lat, place_name }) => {
     if (error) res.send("GEOCODE ISSUE BITCH!!");
 
-    forecast(error, { long, lat, place_name }, (feelslike, place_name) => {
-      console.log("[src app.js]", feelslike, place_name);
-      res.send({
-        feelslike,
-        place_name,
-        temperature
-      });
-    });
+    forecast(
+      error,
+      { long, lat, place_name },
+      (feelslike, place_name, temperature) => {
+        console.log("[src app.js]", feelslike, place_name);
+        res.send({
+          feelslike,
+          place_name,
+          temperature,
+        });
+      }
+    );
   });
 });
 
