@@ -41,6 +41,7 @@ app.get("/weather", (req, res) => {
       res.send({
         feelslike,
         place_name,
+        temperature
       });
     });
   });

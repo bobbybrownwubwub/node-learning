@@ -5,7 +5,7 @@ const input = document.querySelector("input");
 
 weather_form.addEventListener("submit", (e) => {
   document.querySelector("#msg1").textContent = "Loading...";
-
+  document.querySelector("#msg2").textContent = "";
   e.preventDefault();
   let location = input.value;
   const url = `/weather?address=` + location;
@@ -19,7 +19,9 @@ weather_form.addEventListener("submit", (e) => {
       //   [lat, long] = data.features[0].center;
       // }
       document.querySelector("#msg1").textContent = data.place_name;
-      document.querySelector("#msg2").textContent = `Is ${data.temperature} degrees F but feels like 
+      document.querySelector(
+        "#msg2"
+      ).textContent = `Is ${data.temperature} degrees F but feels like 
       ${data.feelslike} degrees`;
     });
   });
