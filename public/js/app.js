@@ -6,6 +6,7 @@ const input = document.querySelector("input");
 weather_form.addEventListener("submit", (e) => {
   e.preventDefault();
   let value = input.value;
+  console.log('test3')
   //const base = ""; //if 'http://localhost:3000'
   const url = `/weather?address=` + location;
   fetch(url).then((response) => {
