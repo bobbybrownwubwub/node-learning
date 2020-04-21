@@ -2,7 +2,10 @@ const path = require("path");
 const express = require("express");
 const chalk = require("chalk");
 const hbs = require("hbs");
+
 const app = express();
+const port = process.env.PORT || 3000;
+
 const forecast = require("./utils/forecast");
 const geocode = require("./utils/geocode");
 
@@ -65,6 +68,6 @@ app.get("*", (req, res) => {
   res.render("404", { msg: "404 NOT FOUND" });
 });
 
-app.listen(3000, () =>
-  console.log(chalk.green.inverse("server is up in 3000"))
+app.listen(port, () =>
+  console.log(chalk.green.inverse("server is up in "+port))
 );
