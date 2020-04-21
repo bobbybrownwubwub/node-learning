@@ -1,8 +1,9 @@
 const request = require("request");
 const chalk = require("chalk");
 
-const forecast = (geocode_error, latlong, callback) => {
-  const weatherstack_url = `http://api.weatherstack.com/current?access_key=54939f827c0ef0c4f9f4661d18b11518&query=${latlong.toString()}&units=f`;
+const forecast = (geocode_error, {long, lat, place_name}, callback) => {
+  console.log('lat+""+long',lat+","+long)
+  const weatherstack_url = `http://api.weatherstack.com/current?access_key=54939f827c0ef0c4f9f4661d18b11518&query=${long+","+lat}&units=f`;
 
   request({ url: weatherstack_url, json: true }, (error, response) => {
     if (error || response.body.success === false || geocode_error) {
@@ -12,7 +13,11 @@ const forecast = (geocode_error, latlong, callback) => {
       );
     } else {
       const data = response.body;
-      callback(data.current.feelslike);
+
+      console.log(chalk.red.inverse("--------------------"));
+      console.log(JSON.stringify(data));
+
+      callback(data.current.feelslike,place_name,data.current.temperature);
     }
   });
 };

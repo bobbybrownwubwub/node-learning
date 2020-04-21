@@ -5,7 +5,6 @@ const hbs = require("hbs");
 
 const app = express();
 const port = process.env.PORT || 3000;
-
 const forecast = require("./utils/forecast");
 const geocode = require("./utils/geocode");
 
@@ -34,15 +33,17 @@ app.get("/weather", (req, res) => {
   let address = req.query.address;
   if (!address) return res.send({ error: "NEEDS ADDRESS BITCH!" });
 
-  geocode(address, (error, latlong) => {
+  geocode(address, (error, { long, lat, place_name }) => {
     if (error) res.send("GEOCODE ISSUE BITCH!!");
 
-    forecast(error, latlong, (feelslike) => {
+    forecast(error, { long, lat, place_name }, (feelslike, place_name) => {
+      console.log("[src app.js]", feelslike, place_name);
       res.send({
         feelslike,
+        place_name,
       });
     });
-  }); 
+  });
 });
 
 app.get("/about", (req, res) => {
@@ -69,5 +70,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () =>
-  console.log(chalk.green.inverse("server is up in "+port))
+  console.log(chalk.green.inverse("server is up in " + port))
 );
